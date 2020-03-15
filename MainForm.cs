@@ -4,9 +4,7 @@ using Microsoft.Win32;
 using Shortcut;
 using System;
 using System.Drawing;
-using System.Reactive;
 using System.Windows.Forms;
-
 
 namespace MicMute
 {
@@ -22,6 +20,11 @@ namespace MicMute
         public MainForm()
         {
             InitializeComponent();
+
+
+            //Set the application to run at startup
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            key.SetValue("MicMute", Application.ExecutablePath.ToString());
         }
 
         private void OnNextDevice(DeviceChangedArgs next)
